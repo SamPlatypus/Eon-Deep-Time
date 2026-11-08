@@ -1,0 +1,132 @@
+@import "@fontsource/fraunces/latin-500.css";
+@import "@fontsource/fraunces/latin-500-italic.css";
+@import "@fontsource/fraunces/latin-600.css";
+@import "@fontsource/outfit/latin-400.css";
+@import "@fontsource/outfit/latin-500.css";
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --color-bg: #07111a;
+  --color-surface: #10202c;
+  --color-fg: #e8f0ea;
+  --color-muted: #93a4ad;
+  --color-accent: #e4b15a;
+  --color-accent-ink: #2a1d0a;
+  --color-line: #243848;
+  --color-sea: #18485c;
+  --shadow-panel: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+  }
+}
+
+.globe-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+
+.globe-canvas.is-dragging {
+  cursor: grabbing;
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+.time-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2.75rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+.time-slider:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.time-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6e5344 0%, #c4a15a 38%, #1c6d86 72%, #e4b15a 100%);
+}
+
+.time-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -8px;
+  border-radius: 999px;
+  border: 2px solid var(--color-bg);
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(228, 177, 90, 0.28);
+}
+
+.time-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6e5344 0%, #c4a15a 38%, #1c6d86 72%, #e4b15a 100%);
+}
+
+.time-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--color-bg);
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+.eon-menu {
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.eon-menu.is-closed {
+  transform: translateY(100%);
+  pointer-events: none;
+}
+
+.eon-menu.is-closed * {
+  pointer-events: none;
+}
+
+.eon-grip {
+  bottom: max(0.45rem, env(safe-area-inset-bottom));
+  touch-action: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eon-menu {
+    transition: none;
+  }
+}
+
+@media (max-height: 520px) {
+  .eon-chapter,
+  .eon-presets {
+    display: none;
+  }
+}
