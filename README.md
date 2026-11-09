@@ -8,3 +8,6 @@ The reconstruction runs on the device: rigid-plate rotations, a zonal energy-bal
 npm install
 npm run dev
 ```
+
+The compiled site is published from `main` by GitHub Actions to [samplatypus.github.io/Eon-Deep-Time](https://samplatypus.github.io/Eon-Deep-Time/).
+
