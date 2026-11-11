@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { Pause, Play, RotateCcw } from "lucide-react";
-import { InstallControl } from "@/components/atlas/InstallControl";
 import { holdSpin, useAtlas } from "@/lib/atlas-store";
 import { PLACES } from "@/lib/paleo/locations";
 import {
@@ -187,14 +186,14 @@ export function Hud() {
         className={"eon-menu absolute inset-0 flex flex-col " + (menuOpen ? "is-open" : "is-closed")}
       >
       <header className="pointer-events-auto flex items-start justify-between gap-4 px-4 pt-[max(0.75rem,env(safe-area-inset-top))] md:px-6">
-        <div className="min-w-0 max-w-xl">
+        <div className="eon-copy min-w-0 max-w-xl">
           <div className="flex items-baseline gap-3">
             <p className="font-display text-2xl italic leading-none text-fg">Eon</p>
-            <p className="text-xs tracking-widest text-pretty text-muted uppercase">
+            <p className="text-xs font-medium tracking-widest text-pretty text-fg/85 uppercase">
               {chapter.era} · {chapter.period}
             </p>
           </div>
-          <p className="eon-chapter mt-2 text-sm text-pretty text-muted">{chapter.text}</p>
+          <p className="eon-chapter mt-2 text-sm font-medium text-pretty text-fg">{chapter.text}</p>
         </div>
         <div className="shrink-0 text-right">
           <p className="font-display text-3xl leading-none tabular-nums text-fg md:text-4xl">{formatAgeShort(age)}</p>
@@ -286,7 +285,7 @@ export function Hud() {
               <Stat label="Sun" value={frame ? `${frame.solar.toFixed(3)}×` : "…"} />
               <Stat label="Land" value={frame ? `${frame.landPct.toFixed(0)}%` : "…"} />
             </div>
-            <p className="line-clamp-2 max-w-md text-sm text-pretty text-muted">
+            <p className="eon-climate max-w-md text-sm font-medium text-pretty text-fg">
               {error ? error : frame ? frame.climateLine : "Solving the zonal energy balance…"}
             </p>
           </div>
@@ -304,7 +303,7 @@ export function Hud() {
                   ),
                 )}
               </div>
-              <p className="mt-1 truncate text-xs text-muted">
+              <p className="mt-1 text-xs font-medium text-pretty text-fg/85">
                 {BIOME_ORDER.map((id, i) => ({ id, v: frame.shares[i] ?? 0 }))
                   .filter((b) => b.id !== "shallow" && b.v > 0.04)
                   .sort((a, b) => b.v - a.v)
@@ -414,13 +413,12 @@ export function Hud() {
             <div className="eon-spark hidden w-56 md:block">
               <Spark series={series} age={age} />
             </div>
-            <details className="text-sm text-muted">
-              <summary className="min-h-11 cursor-pointer list-none py-2">How it is calculated</summary>
-              <p className="max-w-md pb-2 text-pretty">
+            <details className="text-sm text-fg/90">
+              <summary className="min-h-11 cursor-pointer list-none py-2 font-medium">How it is calculated</summary>
+              <p className="max-w-md pb-2 font-medium text-pretty text-fg">
                 Plates are rigid rotations anchored to published paleolatitudes. The future follows Scotese’s Pangea Proxima, not Arctic Amasia. Sea level is a Haq–Miller composite. Ranges rise on a smoothstep and erode exponentially. Climate is a Budyko–Sellers energy-balance model with Myhre CO₂ forcing, a Gough faint sun, and ice–albedo feedback. Biomes are a Whittaker diagram plus rain shadows. It all runs on this device.
               </p>
             </details>
-            <InstallControl />
           </div>
         </div>
       </footer>
