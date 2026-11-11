@@ -190,11 +190,11 @@ export function Hud() {
         <div className="min-w-0 max-w-xl">
           <div className="flex items-baseline gap-3">
             <p className="font-display text-2xl italic leading-none text-fg">Eon</p>
-            <p className="truncate text-xs tracking-widest text-muted uppercase">
+            <p className="text-xs tracking-widest text-pretty text-muted uppercase">
               {chapter.era} · {chapter.period}
             </p>
           </div>
-          <p className="eon-chapter mt-2 line-clamp-2 text-sm text-pretty text-muted md:line-clamp-3">{chapter.text}</p>
+          <p className="eon-chapter mt-2 text-sm text-pretty text-muted">{chapter.text}</p>
         </div>
         <div className="shrink-0 text-right">
           <p className="font-display text-3xl leading-none tabular-nums text-fg md:text-4xl">{formatAgeShort(age)}</p>
@@ -277,8 +277,8 @@ export function Hud() {
       </div>
 
       <footer className="pointer-events-auto border-t border-line bg-surface/95 px-4 pt-3 pb-[max(3.5rem,calc(env(safe-area-inset-bottom)+2.75rem))] md:bg-surface/88">
-        <div className="mx-auto flex max-w-5xl flex-col gap-3">
-          <div className="flex flex-wrap items-end justify-between gap-3">
+        <div className="eon-foot mx-auto flex max-w-5xl flex-col gap-3">
+          <div className="eon-readout flex flex-wrap items-end justify-between gap-3">
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
               <Stat label="GMST" value={frame ? `${frame.gmst.toFixed(1)}°C` : "…"} />
               <Stat label="CO₂" value={frame ? `${Math.round(frame.co2)} ppm` : "…"} />
@@ -292,7 +292,7 @@ export function Hud() {
           </div>
 
           {frame && frame.shares.some((n) => n > 0) ? (
-            <div>
+            <div className="eon-biomes">
               <div className="flex h-2 overflow-hidden rounded-full bg-bg">
                 {BIOME_ORDER.map((id, i) =>
                   id === "shallow" || (frame.shares[i] ?? 0) < 0.008 ? null : (
@@ -321,7 +321,7 @@ export function Hud() {
             </div>
           ) : null}
 
-          <div className="flex items-center gap-3">
+          <div className="eon-time flex items-center gap-3">
             <button
               type="button"
               onClick={() => {
@@ -388,7 +388,7 @@ export function Hud() {
             })}
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="eon-tools flex flex-wrap items-center justify-between gap-3">
             <div className="flex rounded-full bg-bg p-1 shadow-panel" role="group" aria-label="Map style">
               {(
                 [
@@ -411,7 +411,7 @@ export function Hud() {
                 </button>
               ))}
             </div>
-            <div className="hidden w-56 md:block">
+            <div className="eon-spark hidden w-56 md:block">
               <Spark series={series} age={age} />
             </div>
             <details className="text-sm text-muted">

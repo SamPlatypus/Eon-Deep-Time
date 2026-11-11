@@ -101,6 +101,9 @@
 }
 
 .eon-menu {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -124,9 +127,41 @@
   }
 }
 
-@media (max-height: 520px) {
-  .eon-chapter,
-  .eon-presets {
+@media (orientation: landscape) and (max-height: 760px) {
+  .eon-spark {
     display: none;
+  }
+
+  .eon-foot {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-areas:
+      "readout time"
+      "biomes presets"
+      "biomes tools";
+    align-items: center;
+    gap: 0.35rem 1rem;
+  }
+
+  .eon-readout {
+    grid-area: readout;
+  }
+  .eon-biomes {
+    grid-area: biomes;
+  }
+  .eon-time {
+    grid-area: time;
+  }
+  .eon-presets {
+    grid-area: presets;
+  }
+  .eon-tools {
+    grid-area: tools;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .eon-menu footer {
+    padding-top: 0.45rem;
   }
 }
