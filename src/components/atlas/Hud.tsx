@@ -413,9 +413,9 @@ export function Hud() {
             <div className="eon-spark hidden w-56 md:block">
               <Spark series={series} age={age} />
             </div>
-            <details className="text-sm text-fg/90">
+            <details className="eon-calc text-sm">
               <summary className="min-h-11 cursor-pointer list-none py-2 font-medium">How it is calculated</summary>
-              <p className="max-w-md pb-2 font-medium text-pretty text-fg">
+              <p>
                 Plates are rigid rotations anchored to published paleolatitudes. The future follows Scotese’s Pangea Proxima, not Arctic Amasia. Sea level is a Haq–Miller composite. Ranges rise on a smoothstep and erode exponentially. Climate is a Budyko–Sellers energy-balance model with Myhre CO₂ forcing, a Gough faint sun, and ice–albedo feedback. Biomes are a Whittaker diagram plus rain shadows. It all runs on this device.
               </p>
             </details>
