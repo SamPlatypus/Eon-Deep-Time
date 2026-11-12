@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Pause, Play, RotateCcw } from "lucide-react";
+import { InstallControl } from "@/components/atlas/InstallControl";
 import { holdSpin, useAtlas } from "@/lib/atlas-store";
 import { PLACES } from "@/lib/paleo/locations";
 import {
@@ -431,6 +432,7 @@ export function Hud() {
                 Plates are rigid rotations anchored to published paleolatitudes. The future follows Scotese’s Pangea Proxima, not Arctic Amasia. Sea level is a Haq–Miller composite. Ranges rise on a smoothstep and erode exponentially. Climate is a Budyko–Sellers energy-balance model with Myhre CO₂ forcing, a Gough faint sun, and ice–albedo feedback. Biomes are a Whittaker diagram plus rain shadows. It all runs on this device.
               </p>
             </details>
+            <InstallControl />
           </div>
         </div>
       </footer>
