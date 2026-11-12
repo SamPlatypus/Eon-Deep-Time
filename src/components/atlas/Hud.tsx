@@ -159,9 +159,21 @@ export function Hud() {
   const series = useAtlas((s) => s.series);
   const error = useAtlas((s) => s.error);
   const menuOpen = useAtlas((s) => s.menuOpen);
+  const calcRef = useRef<HTMLDetailsElement>(null);
   const chapter = chapterFor(age);
   const places: Array<PlaceSnap | (typeof PLACES)[number]> = frame?.places ?? PLACES;
   const focused = frame?.places.find((p) => p.id === focusId) ?? null;
+
+  useEffect(() => {
+    function onPointerDown(event: PointerEvent) {
+      const node = calcRef.current;
+      if (!node?.open) return;
+      if (event.target instanceof Node && node.contains(event.target)) return;
+      node.open = false;
+    }
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, []);
 
   useEffect(() => {
     try {
@@ -413,7 +425,7 @@ export function Hud() {
             <div className="eon-spark hidden w-56 md:block">
               <Spark series={series} age={age} />
             </div>
-            <details className="eon-calc text-sm">
+            <details className="eon-calc text-sm" ref={calcRef}>
               <summary className="min-h-11 cursor-pointer list-none py-2 font-medium">How it is calculated</summary>
               <p>
                 Plates are rigid rotations anchored to published paleolatitudes. The future follows Scotese’s Pangea Proxima, not Arctic Amasia. Sea level is a Haq–Miller composite. Ranges rise on a smoothstep and erode exponentially. Climate is a Budyko–Sellers energy-balance model with Myhre CO₂ forcing, a Gough faint sun, and ice–albedo feedback. Biomes are a Whittaker diagram plus rain shadows. It all runs on this device.
